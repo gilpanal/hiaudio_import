@@ -117,6 +117,35 @@ hiaudio_import --dataset-path ../DSD100subset/ --collections-pattern "Sources/*"
 
 ```
 
+Sample run of the last example: 
+
+```
+2023-10-18 16:00:21 [hiaudio_import.hiimport:MainThread] INFO: [1/2] Found collection 'Dev' at Sources/Dev
+2023-10-18 16:00:21 [hiaudio_import.hiimport:MainThread] INFO:  [1/2] Found composition 055 - Angels In Amplifiers - I'm Alright
+2023-10-18 16:00:21 [hiaudio_import.hiimport:MainThread] INFO:          [1/4] Adding track: bass.wav
+2023-10-18 16:00:21 [hiaudio_import.hiimport:MainThread] INFO:          [2/4] Adding track: drums.wav
+2023-10-18 16:00:21 [hiaudio_import.hiimport:MainThread] INFO:          [3/4] Adding track: other.wav
+2023-10-18 16:00:21 [hiaudio_import.hiimport:MainThread] INFO:          [4/4] Adding track: vocals.wav
+2023-10-18 16:00:22 [hiaudio_import.hiimport:MainThread] INFO:  [2/2] Found composition 081 - Patrick Talbot - Set Me Free
+2023-10-18 16:00:22 [hiaudio_import.hiimport:MainThread] INFO:          [1/4] Adding track: bass.wav
+2023-10-18 16:00:22 [hiaudio_import.hiimport:MainThread] INFO:          [2/4] Adding track: drums.wav
+2023-10-18 16:00:22 [hiaudio_import.hiimport:MainThread] INFO:          [3/4] Adding track: other.wav
+2023-10-18 16:00:22 [hiaudio_import.hiimport:MainThread] INFO:          [4/4] Adding track: vocals.wav
+2023-10-18 16:00:22 [hiaudio_import.hiimport:MainThread] INFO: [2/2] Found collection 'Test' at Sources/Test
+2023-10-18 16:00:22 [hiaudio_import.hiimport:MainThread] INFO:  [1/2] Found composition 005 - Angela Thomas Wade - Milk Cow Blues
+2023-10-18 16:00:22 [hiaudio_import.hiimport:MainThread] INFO:          [1/4] Adding track: bass.wav
+2023-10-18 16:00:23 [hiaudio_import.hiimport:MainThread] INFO:          [2/4] Adding track: drums.wav
+2023-10-18 16:00:23 [hiaudio_import.hiimport:MainThread] INFO:          [3/4] Adding track: other.wav
+2023-10-18 16:00:23 [hiaudio_import.hiimport:MainThread] INFO:          [4/4] Adding track: vocals.wav
+2023-10-18 16:00:23 [hiaudio_import.hiimport:MainThread] INFO:  [2/2] Found composition 049 - Young Griffo - Facade
+2023-10-18 16:00:23 [hiaudio_import.hiimport:MainThread] INFO:          [1/4] Adding track: bass.wav
+2023-10-18 16:00:23 [hiaudio_import.hiimport:MainThread] INFO:          [2/4] Adding track: drums.wav
+2023-10-18 16:00:24 [hiaudio_import.hiimport:MainThread] INFO:          [3/4] Adding track: other.wav
+2023-10-18 16:00:24 [hiaudio_import.hiimport:MainThread] INFO:          [4/4] Adding track: vocals.wav
+2023-10-18 16:00:24 [hiaudio_import.hiimport:MainThread] INFO: Imported 2 collections, 4 compositions, 16 tracks.
+```
+
+
 # TODO
 
 - handle multiple level of collections
