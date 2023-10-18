@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hiaudio_import"
+version = "0.1"
+authors = [{name="Aurelien David", email="aurelien.david@telecom-paris.fr" }]
+description = "Import script for the Hiaudio platform"
+readme = "README.md"
+dependencies = ["argparse", "coloredlogs", "requests"]
+requires-python = ">=3.10"
+
+[project.scripts]
+hiaudio_import = "hiaudio_import.hiimport:main"
+
+[project.urls]
+"Homepage" = "https://gitlab.telecom-paris.fr/idsinge/hiaudio/hiaudio_import"
+"Bug Tracker" = "https://gitlab.telecom-paris.fr/idsinge/hiaudio/hiaudio_import/-/issues"
