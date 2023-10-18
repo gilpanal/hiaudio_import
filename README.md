@@ -28,20 +28,20 @@ An import script for hiaudio.fr
 options:
   -h, --help            show this help message and exit
   --loglevel {DEBUG,INFO,WARNING,ERROR,CRITICAL}
-                        Global log level
-  --endpoint ENDPOINT   the endpoint location of the platform
+                        Global log level (default: INFO)
+  --endpoint ENDPOINT   the endpoint location of the platform (default: https://hiaudio.fr)
   --token-var TOKEN_VAR
-                        the environment variable containing the JWT for API requests
+                        the environment variable containing the JWT for API requests (default: JWT)
   --dataset-path DATASET_PATH
-                        the main folder containing the dataset
+                        the main folder containing the dataset (default: None)
   --parent-collection PARENT_COLLECTION
-                        an option collection name for everything that will be imported
+                        an option collection name for everything that will be imported (default: None)
   --collections-pattern COLLECTIONS_PATTERN
-                        the pattern to find collections folders, relative to dataset root [default: no collections]
+                        the pattern to find collections folders, relative to dataset root. Use empty string to disable collections. (default: )
   --compositions-pattern COMPOSITIONS_PATTERN
-                        the pattern to find compositions [default: %(collection_path)s/*]
+                        the pattern to find compositions (default: %(collection_path)s/*)
   --tracks-pattern TRACKS_PATTERN
-                        the pattern to find tracks [default: %(composition_path)s/*]
+                        the pattern to find tracks (default: %(composition_path)s/*)
 ```
 
 

@@ -17,7 +17,7 @@ AUTH_HEADER = {"Authorization": ""}
 
 def main():
 
-    parser = argparse.ArgumentParser(description="An import script for hiaudio.fr")
+    parser = argparse.ArgumentParser(description="An import script for hiaudio.fr", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('--loglevel', dest='LOG_LEVEL', type=lambda s : s.upper(),
                     choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'], default="INFO",
@@ -30,9 +30,9 @@ def main():
     parser.add_argument("--dataset-path", type=str, help="the main folder containing the dataset", required=True)
     parser.add_argument("--parent-collection", type=str, help="an option collection name for everything that will be imported", required=False, default=None)
 
-    parser.add_argument("--collections-pattern", type=str, help='the pattern to find collections folders, relative to dataset root [default: no collections]', required=False, default="")
-    parser.add_argument("--compositions-pattern", type=str, help='the pattern to find compositions [default: %%(collection_path)s/*]', required=False, default='%(collection_path)s/*')
-    parser.add_argument("--tracks-pattern", type=str, help='the pattern to find tracks [default:  %%(composition_path)s/*]', required=False, default='%(composition_path)s/*')
+    parser.add_argument("--collections-pattern", type=str, help='the pattern to find collections folders, relative to dataset root. Use empty string to disable collections.', required=False, default="")
+    parser.add_argument("--compositions-pattern", type=str, help='the pattern to find compositions', required=False, default='%(collection_path)s/*')
+    parser.add_argument("--tracks-pattern", type=str, help='the pattern to find tracks', required=False, default='%(composition_path)s/*')
 
     args = parser.parse_args()
 
@@ -198,15 +198,11 @@ def create_track(composition_id, trackfile_path):
     }
 
     r = requests.post(ENDPOINT + method, data=data, files=files, headers=AUTH_HEADER, verify=False)
-    # r = requests.post(ENDPOINT + method, data=data, headers=AUTH_HEADER, verify=False)
-    # r = requests.post(ENDPOINT + method, files=files, headers=AUTH_HEADER, verify=False)
 
-    # req = requests.Request('POST','http://stackoverflow.com',headers={'X-Custom':'Test'},data='a=1&b=2')
+    ## DEBUG: dump the whole requests before sending
     # req = requests.Request('POST',ENDPOINT + method, data=data, headers=AUTH_HEADER)
-
     # prepared = req.prepare()
     # pretty_print_POST(prepared)
-
     # s = requests.Session()
     # s.verify=False
     # r = s.send(prepared)
