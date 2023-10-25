@@ -10,6 +10,8 @@ log = logging.getLogger(__name__)
 coloredlogs.install(level='DEBUG', logger=log, fmt="%(asctime)s [%(name)s:%(threadName)s] %(levelname)s: %(message)s")
 
 
+ALLOWED_EXTENSIONS = {'.wav', '.mp3', '.ogg', '.m4a'}
+
 ENDPOINT = ""
 
 TOKEN = ""
@@ -44,6 +46,10 @@ def main():
     ENDPOINT = args.endpoint
     log.debug(f"HiAudio enpoint set to {args.endpoint}")
 
+
+    if not os.path.isdir(args.dataset_path):
+        log.error(f"Cannot find dataset root directory at {args.dataset_path}. This parameter should point to the directory containing the whole dataset to import.")
+        exit(1)
 
 
     TOKEN = os.environ.get(args.token_var)
@@ -108,6 +114,11 @@ def main():
                     for tr_idx, track_path in enumerate(all_tracks, start=1):
 
                         track_name = os.path.basename(track_path)
+                        _, track_ext = os.path.splitext(track_path)
+
+                        if not track_ext in ALLOWED_EXTENSIONS:
+                            log.warning(f"Skipping file {track_path}, extensions {track_ext} not in allowed list ({','.join(ALLOWED_EXTENSIONS)})")
+                            continue
 
                         log.info(f"\t\t[{tr_idx}/{len(all_tracks)}] Adding track: {track_name}")
 
