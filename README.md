@@ -21,7 +21,7 @@ The basic idea is to provide the script with patterns on how to find collections
 ```
 $ hiaudio_import -h
 usage: hiaudio_import [-h] [--loglevel {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [--endpoint ENDPOINT] [--token-var TOKEN_VAR] --dataset-path DATASET_PATH [--parent-collection PARENT_COLLECTION] [--collections-pattern COLLECTIONS_PATTERN] [--compositions-pattern COMPOSITIONS_PATTERN]
-                      [--tracks-pattern TRACKS_PATTERN]
+                      [--tracks-pattern TRACKS_PATTERN] [--tracks-exclude-pattern TRACKS_EXCLUDE_PATTERN]
 
 An import script for hiaudio.fr
 
@@ -42,6 +42,8 @@ options:
                         the pattern to find compositions (default: %(collection_path)s/*)
   --tracks-pattern TRACKS_PATTERN
                         the pattern to find tracks (default: %(composition_path)s/*)
+  --tracks-exclude-pattern TRACKS_EXCLUDE_PATTERN
+                        the pattern for track names to exclude (e.g.: mixture.wav) (default: )
 ```
 
 

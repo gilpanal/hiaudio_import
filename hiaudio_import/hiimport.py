@@ -1,6 +1,6 @@
 import argparse
 import coloredlogs, logging
-import glob, os
+import glob, os, fnmatch
 
 import requests
 from urllib3.exceptions import InsecureRequestWarning
@@ -35,6 +35,7 @@ def main():
     parser.add_argument("--collections-pattern", type=str, help='the pattern to find collections folders, relative to dataset root. Use empty string to disable collections.', required=False, default="")
     parser.add_argument("--compositions-pattern", type=str, help='the pattern to find compositions', required=False, default='%(collection_path)s/*')
     parser.add_argument("--tracks-pattern", type=str, help='the pattern to find tracks', required=False, default='%(composition_path)s/*')
+    parser.add_argument("--tracks-exclude-pattern", type=str, help='the pattern for track names to exclude (e.g.: mixture.wav)', required=False, default='')
 
     args = parser.parse_args()
 
@@ -117,7 +118,11 @@ def main():
                         _, track_ext = os.path.splitext(track_path)
 
                         if not track_ext in ALLOWED_EXTENSIONS:
-                            log.warning(f"Skipping file {track_path}, extensions {track_ext} not in allowed list ({','.join(ALLOWED_EXTENSIONS)})")
+                            log.warning(f"Skipping file {track_path}, extension '{track_ext}' not in allowed list ({','.join(ALLOWED_EXTENSIONS)})")
+                            continue
+
+                        if fnmatch.fnmatch(track_name, args.tracks_exclude_pattern):
+                            log.info(f"Skipping file {track_name} because it matches exclude pattern {args.tracks_exclude_pattern}")
                             continue
 
                         log.info(f"\t\t[{tr_idx}/{len(all_tracks)}] Adding track: {track_name}")
@@ -196,7 +201,8 @@ def create_composition(name, collection_id=None, priv=3):
 def create_track(composition_id, trackfile_path):
 
     if not os.path.isfile(trackfile_path):
-        log.error(f"Track file {trackfile_path} does not exist")
+        log.error(f"Track file {trackfile_path} does not exist or is not a file")
+        return False
 
     method = "/fileUpload"
 
