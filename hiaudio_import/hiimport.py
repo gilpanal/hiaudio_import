@@ -1,7 +1,7 @@
 import argparse
 import coloredlogs, logging
 import glob, os, fnmatch
-
+from enum import IntEnum
 import requests
 from urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
@@ -16,6 +16,22 @@ ENDPOINT = ""
 
 TOKEN = ""
 AUTH_HEADER = {"Authorization": ""}
+
+class PrivLevel(IntEnum):
+    public = 1
+    onlyreg = 2
+    private = 3
+
+    def __str__(self):
+        return self.name
+
+    @staticmethod
+    def from_string(s):
+        try:
+            return PrivLevel[s]
+        except KeyError:
+            raise ValueError()
+
 
 def main():
 
@@ -37,6 +53,8 @@ def main():
     parser.add_argument("--tracks-pattern", type=str, help='the pattern to find tracks', required=False, default='%(composition_path)s/*')
     parser.add_argument("--tracks-exclude-pattern", type=str, help='the pattern for track names to exclude (e.g.: mixture.wav)', required=False, default='')
 
+    parser.add_argument('--privacy-level', type=PrivLevel.from_string, help="the level of privacy for the new compositions", choices=list(PrivLevel), required=False, default='private')
+
     args = parser.parse_args()
 
     log.setLevel(getattr(logging, args.LOG_LEVEL))
@@ -47,6 +65,8 @@ def main():
     ENDPOINT = args.endpoint
     log.debug(f"HiAudio enpoint set to {args.endpoint}")
 
+    privacy = int(args.privacy_level)
+    log.debug(f"Privacy set to {args.privacy_level} convert to int {privacy}")
 
     if not os.path.isdir(args.dataset_path):
         log.error(f"Cannot find dataset root directory at {args.dataset_path}. This parameter should point to the directory containing the whole dataset to import.")
@@ -60,7 +80,7 @@ def main():
 
     parentcol_id = None
     if args.parent_collection:
-        pok, parentcol_id = create_collection(args.parent_collection)
+        pok, parentcol_id = create_collection(args.parent_collection, priv=privacy)
         if pok:
             log.info(f"Created parent collection {args.parent_collection}")
 
@@ -84,7 +104,7 @@ def main():
         if collection_name:
             log.info(f"[{col_idx}/{len(all_collections)}] Found collection '{collection_name}' at {collection_path}")
 
-            col_ok, col_uuid = create_collection(collection_name, parent_id=parentcol_id)
+            col_ok, col_uuid = create_collection(collection_name, parent_id=parentcol_id, priv=privacy)
 
             nb_cols += 1 if col_ok else 0
 
@@ -101,7 +121,7 @@ def main():
 
                 log.info(f"\t[{comp_idx}/{len(all_compositions)}] Found composition {composition_name}")
 
-                comp_ok, comp_uuid = create_composition(composition_name, collection_id=col_uuid)
+                comp_ok, comp_uuid = create_composition(composition_name, collection_id=col_uuid, priv=privacy)
 
                 if comp_ok:
 

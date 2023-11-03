@@ -44,6 +44,8 @@ options:
                         the pattern to find tracks (default: %(composition_path)s/*)
   --tracks-exclude-pattern TRACKS_EXCLUDE_PATTERN
                         the pattern for track names to exclude (e.g.: mixture.wav) (default: )
+  --privacy-level {public,onlyreg,private}
+                        the level of privacy for the new compositions (default: private)
 ```
 
 
