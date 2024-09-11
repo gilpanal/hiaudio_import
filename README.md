@@ -7,11 +7,17 @@ A sample script to import data into the hiaudio platform.
 git clone git@gitlab.enst.fr:idsinge/hiaudio/hiaudio_import.git
 cd hiaudio_import
 
-# inside a venv recommended
+python3 -m venv venv 
+
+. venv/bin/activate
+
 pip install -e . 
 ```
 
 This will install a `hiaudio_import` script in the PATH of the venv. This script only runs the `main()` function of the `hiaudio_import/hiimport.py` file which can be edited without reinstalling the package. 
+
+
+**NOTE**: You may need to run `python3 -m pip install --upgrade pip` if `pip install -e . ` throws an error
 
 
 # Usage
