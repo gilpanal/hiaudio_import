@@ -4,7 +4,7 @@ A sample script to import data into the hiaudio platform.
 # Install
 
 ```bash
-git clone git@gitlab.enst.fr:idsinge/hiaudio/hiaudio_import.git
+git clone https://github.com/idsinge/hiaudio_import.git
 cd hiaudio_import
 
 python3 -m venv venv 
