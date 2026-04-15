@@ -1,7 +1,23 @@
-A sample script to import data into the hiaudio platform. 
+# hiaudio_import
+
+A script to import multi-track music datasets into the [Hi-Audio](https://hiaudio.fr) platform.
 
 
-# Install
+## Prerequisites
+
+- Python 3.x
+- A registered account on [hiaudio.fr](https://hiaudio.fr)
+- A valid API token — log in, go to your [profile page](https://hiaudio.fr/profile.html), and copy the API token value.
+
+<img src="./doc/api_token.png" alt="API token location in profile page" width="400"/>
+
+Set the token as an environment variable before running the script:
+
+```bash
+export JWT="your_api_token"
+```
+
+## Install
 
 ```bash
 git clone https://github.com/idsinge/hiaudio_import.git
@@ -20,7 +36,7 @@ This will install a `hiaudio_import` script in the PATH of the venv. This script
 **NOTE**: You may need to run `python3 -m pip install --upgrade pip` if `pip install -e . ` throws an error
 
 
-# Usage
+## Usage
 
 The basic idea is to provide the script with patterns on how to find collections, compositions and tracks to import. 
 
@@ -55,7 +71,7 @@ options:
 ```
 
 
-# Examples
+## Examples
 
 The following examples are based on the [DSD100 sample](https://www.loria.fr/~aliutkus/DSD100subset.zip) dataset which has the following file structure:
 
@@ -113,11 +129,11 @@ export JWT="myjwtoken"
 # for localhost testing add "--endpoint https://localhost:7007" to all commands
 
 
-# import all compositions in Sources/, wether they are in Dev/ or in Test/, into a flat hierarchy
+# import all compositions in Sources/, whether they are in Dev/ or in Test/, into a flat hierarchy
 hiaudio_import  --dataset-path ../DSD100subset/ --compositions-pattern "Sources/*/*"
 
 
-# import all compositions in Sources/, wether they are in Dev/ or in Test/, all under a parent collection (with debug level logging)
+# import all compositions in Sources/, whether they are in Dev/ or in Test/, all under a parent collection (with debug level logging)
 hiaudio_import --loglevel DEBUG --dataset-path ../DSD100subset/ --compositions-pattern "Sources/*/*" --parent-collection "DSD100subset" 
 
 
@@ -156,7 +172,7 @@ Sample run of the last example:
 ```
 
 
-# TODO
+## TODO
 
 - handle multiple level of collections
 - handle privacy parameter (for now everything is set to private)
@@ -164,3 +180,55 @@ Sample run of the last example:
 - extract more metadata when the platform supports it (artist, instrument, etc.)
 - add options to upload raw metadata for unsupported fields (may be used in postprocessing)
 - test with more data volume and more datasets
+
+---
+
+## Acknowledgments
+
+The Hi-Audio platform is developed as part of the project *Hybrid and Interpretable Deep Neural Audio Machines*, funded by the **European Research Council (ERC)** under the European Union's Horizon Europe research and innovation programme (grant agreement No. 101052978).
+
+<img src="./doc/ERC_logo.png" alt="European Research Council logo" width="250"/>
+
+---
+
+## How to Cite
+
+If you use or reference the data or findings from this repository, please cite the published journal article. You may also cite the repository directly.
+
+> Gil Panal, J. M., David, A., & Richard, G. (2026). The Hi-Audio online platform for recording and distributing multi-track music datasets. *Journal on Audio, Speech, and Music Processing*. https://doi.org/10.1186/s13636-026-00459-0
+
+**BibTeX:**
+
+```bibtex
+@article{GilPanal2026,
+  author  = {Gil Panal, Jos{\'e} M. and David, Aur{\'e}lien and Richard, Ga{\"e}l},
+  title   = {The Hi-Audio online platform for recording and distributing multi-track music datasets},
+  journal = {Journal on Audio, Speech, and Music Processing},
+  year    = {2026},
+  issn    = {3091-4523},
+  doi     = {10.1186/s13636-026-00459-0},
+  url     = {https://doi.org/10.1186/s13636-026-00459-0}
+}
+```
+
+A preprint version is also available at: [https://hal.science/hal-05153739](https://hal.science/hal-05153739)
+
+**Repository citation:**
+
+> Gil Panal, J. M., David, A., & Richard, G. (2026). *Hi-Audio Import* [Software repository]. GitHub. https://github.com/idsinge/hiaudio_import
+
+```bibtex
+@misc{GilPanal2026import,
+  author = {Gil Panal, Jos{\'e} M. and David, Aur{\'e}lien and Richard, Ga{\"e}l},
+  title  = {Hi-Audio Import},
+  year   = {2026},
+  url    = {https://github.com/idsinge/hiaudio_import}
+}
+```
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).  
+Copyright (c) 2022 Hi-Audio.
