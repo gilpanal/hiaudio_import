@@ -67,7 +67,8 @@ options:
   --tracks-exclude-pattern TRACKS_EXCLUDE_PATTERN
                         the pattern for track names to exclude (e.g.: mixture.wav) (default: )
   --privacy-level {public,onlyreg,private}
-                        the level of privacy for the new compositions (default: private)
+                        the level of privacy for the new compositions: public (everyone), onlyreg (registered users only), private (default: private)
+                        NOTE: this parameter is accepted by the script but not yet enforced server-side.
 ```
 
 
@@ -123,8 +124,8 @@ Here are some script commands to import the data, depending on the wanted result
 
 ```bash
 
-# first add the JWT token to the environment variables for API call
-export JWT="myjwtoken"
+# reminder: make sure your API token is set in the environment
+export JWT="your_api_token"
 
 # for localhost testing add "--endpoint https://localhost:7007" to all commands
 
@@ -175,7 +176,7 @@ Sample run of the last example:
 ## TODO
 
 - handle multiple level of collections
-- handle privacy parameter (for now everything is set to private)
+- handle privacy parameter: backend API needs to expose the privacy field getter before the `--privacy-level` flag takes effect
 - extract description
 - extract more metadata when the platform supports it (artist, instrument, etc.)
 - add options to upload raw metadata for unsupported fields (may be used in postprocessing)
